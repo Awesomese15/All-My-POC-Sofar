@@ -1,0 +1,23 @@
+<div class="ng-autocomplete">
+    <ng-autocomplete
+      [data]="cars"
+      [searchKeyword]="keyword"
+      placeholder="Enter the Country Name"
+      (selected)='selectEvent($event)'
+      (inputChanged)='onChangeSearch($event)'
+      (inputFocused)='onFocused($event)'
+      historyIdentifier="cars"
+      [itemTemplate]="itemTemplate"
+      [notFoundTemplate]="notFoundTemplate"
+    
+      >
+    </ng-autocomplete>
+  
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.make"></a>
+    </ng-template>
+  
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>

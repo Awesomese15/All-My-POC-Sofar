@@ -1,0 +1,11 @@
+.header{
+    border-style: solid;
+}
+.gridrow{
+    border-style: groove;
+    
+}
+.gridrowColumn{
+    border-style: groove;
+    border-right: ;
+}

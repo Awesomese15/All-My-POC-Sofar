@@ -1,0 +1,149 @@
+
+<div class="container-fluid">
+    <div class="float-right">
+        <!-- Auto Complete -->
+        <div class="ng-autocomplete">
+            <ng-autocomplete
+              [data]="cars"
+              [searchKeyword]="keyword"
+              placeholder="Enter the Company Name"
+              (selected)='selectEvent($event)'
+              (inputChanged)='onChangeSearch($event)'
+              (inputFocused)='onFocused($event)'
+              historyIdentifier="cars"
+              [notFoundTemplate]="notFoundTemplate"
+            
+              >
+            </ng-autocomplete>
+          
+            <!-- <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.make"></a>
+            </ng-template> -->
+          
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </div>
+    
+    </div>
+    <button id="asc" (click)="ascOrNormal('asc')">Ascending</button>
+    <button (click)="sortData('desc')">Descending</button>
+  <div class="col-md-12">
+    <h4>Car List</h4>
+  <!-- <table>
+    <tr>
+        <th>Name</th>
+        <th>Model</th>
+        <th>Price</th>
+    </tr>
+    <tr  class="list-group-item"
+    *ngFor="
+      let car of cars | paginate : {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: count
+            };
+      let i = index
+    "
+    [class.active]="i == currentIndex"
+    (click)="setActiveTutorial(car, i)"
+    >
+            <td><div contenteditable>{{car.make}}</div></td>
+            <td><div contenteditable>{{car.model}}</div></td>
+            <td><div contenteditable>{{car.price}}</div></td>
+    </tr>
+  </table> -->
+  <div class="row header">
+    <div class="col">
+        <b>Name</b>
+    </div>
+    <div class="col">
+        <b>Model</b>
+    </div>
+    <div class="col">
+        <b>Price</b>
+    </div>
+  </div>
+  <div class="row gridrow"  *ngFor="
+  let car of cars | paginate : {
+          itemsPerPage: pageSize,
+          currentPage: page,
+          totalItems: count
+        };
+  let i = index
+    "
+    [class.active]="i == currentIndex"
+    (click)="setActiveTutorial(car, i)"
+    >
+        <!-- <div class="col gridrowColumn"><button [popover]="myPopover" [popoverOnHover]="true" popoverPlacement="right" [popoverCloseOnMouseOutside]="true" data-toggle="modal" data-target="#myModal">{{car.make}}</button></div> -->
+        <div class="col gridrowColumn"><button data-toggle="modal" data-target="#myModal" (click)="showDetails(car)">{{car.make}}</button></div>
+
+        <!-- <popover-content #myPopover
+        title="Car Info"
+        [closeOnClickOutside]="true"
+        [animation]="true"
+        [closeOnMouseOutside]="true"
+        > -->
+        <!-- <div>
+          {{car.make}}
+        </div>
+        <div>
+          {{car.model}}
+        </div>
+        <div>
+          {{car.price}}
+        </div> -->
+
+
+        
+      
+      
+
+        <!-- </popover-content> -->
+        <div class="col gridrowColumn">{{car.model}}</div>
+        <div class="col gridrowColumn">{{car.price}}</div>
+
+    </div>
+
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div>
+              {{make}}
+            </div>
+            <div>
+              {{model}}
+            </div>
+            <div>
+              {{price}}
+            </div>
+           
+          </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</div>
+  <div class="col-md-12">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      [responsive]="true"
+      (pageChange)="handlePageChange($event)"
+    ></pagination-controls>
+  </div>
+</div>

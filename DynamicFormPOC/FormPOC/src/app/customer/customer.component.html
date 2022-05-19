@@ -1,0 +1,158 @@
+<form [formGroup]="customerForm" >
+  <div>{{dateVariable | customDate}}</div>
+    <label for="name">Name</label>
+    <input formControlName="name" id="name"/> 
+    <span class="text-danger" *ngIf="(customerFormControls.name.touched || submitted) &&  customerFormControls.name.errors?.required">
+      <small>Name is required</small>
+    </span>
+    <span class="text-danger" *ngIf="(customerFormControls.name.errors?.badUserName)">
+        <small>This username is not allowed</small>
+    </span>
+   
+    <div formGroupName="address">
+        <label for="country">Country</label>
+        <!-- <input formControlName="country" id="country"/>  -->
+<ng-multiselect-dropdown
+  [placeholder]="'Country'"
+  [settings]="countryDropdownSettings" 
+  [data]="countryList"
+  formControlName="country"
+  id="country"
+  (onSelect)="onItemSelect($event)"
+  (onSelectAll)="onSelectAll($event)"
+>
+</ng-multiselect-dropdown>
+<div>
+<span class="text-danger" *ngIf="(country.touched || submitted) &&  country.errors?.required">
+  <small>Country is required</small>
+</span>
+</div>
+        <label for="state">State</label>
+<ng-multiselect-dropdown
+  [placeholder]="'State'"
+  [settings]="stateDropdownSettings" 
+  [data]="stateList"
+  formControlName="state"
+  
+  (onSelect)="onStateSelect($event)"
+  (onSelectAll)="onSelectAll($event)"
+>
+</ng-multiselect-dropdown>
+<div>
+<span class="text-danger" *ngIf="(state.touched || submitted) &&  state.errors?.required">
+  <small>State is required</small>
+</span>
+</div>
+        <!-- <input formControlName="state" id="state"/>  -->
+    <label for="city">City</label>
+<ng-multiselect-dropdown
+  [placeholder]="'City'"
+  [settings]="cityDropdownSettings" 
+  [data]="cityList"
+  formControlName="city"
+  
+  (onSelect)="onCitySelect($event)"
+  (onSelectAll)="onSelectAll($event)"
+>
+</ng-multiselect-dropdown>
+<span class="text-danger" *ngIf="(city.touched || submitted) &&  city.errors?.required">
+  <small>City is required</small>
+</span>
+        <!-- <input formControlName="city" id="city"/>  -->
+    </div>
+    <label for="role">Role</label>
+<ng-multiselect-dropdown
+  [placeholder]="'Role'"
+  [settings]="roleDropdownSettings" 
+  [data]="roleList"
+  formControlName="roles"
+  
+  (onSelect)="onRoleSelect($event)"
+  (onSelectAll)="onSelectAll($event)"
+>
+</ng-multiselect-dropdown>
+<div>
+<span class="text-danger" *ngIf="(customerFormControls.roles.touched || submitted) &&  customerFormControls.roles.errors?.required">
+  <small>Role is required</small>
+</span>
+</div>
+    <button (click)="onSubmit()">Submit</button>
+
+  <div class="dynamicPart" >
+    <button id="add_friends" (click)="addFriends()">Add Friends</button> 
+    <button (click)="removeFriend()">Remove Friend</button> 
+    <div formArrayName="friends"
+    *ngFor= "let friend of customerForm.get('friends')['controls']; let i=index;"
+    >
+      <div [formGroupName]="i">
+        <div>
+        <input formControlName="name" placeholder="Friend's Name">
+          <div >
+            <span *ngIf="friend.get('name').touched &&
+            friend.get('name').errors?.required">
+          <small>Name must be filled</small>
+          <!-- <ng-template #errorBlock>Name must be filled</ng-template> -->
+          </span>
+          </div>
+      </div>
+      <div formGroupName="address">
+        <div>
+          <ng-multiselect-dropdown
+             [placeholder]="'Country'"
+               [settings]="countryDropdownSettings" 
+               [data]="countryList"
+               formControlName="country"
+               id="country"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+        <div>
+          <ng-multiselect-dropdown
+          [placeholder]="'State'"
+          [settings]="stateDropdownSettings" 
+          [data]="stateList"
+          formControlName="state"
+          
+          (onSelect)="onStateSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+        </div>
+        <div>
+          <ng-multiselect-dropdown
+          [placeholder]="'City'"
+          [settings]="cityDropdownSettings" 
+          [data]="cityList"
+          formControlName="city"
+          
+          (onSelect)="onCitySelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+        </div>
+      </div>
+        <div>
+          <ng-multiselect-dropdown
+          [placeholder]="'Role'"
+          [settings]="roleDropdownSettings" 
+          [data]="roleList"
+          formControlName="roles"
+          
+          (onSelect)="onRoleSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+        </div>
+        <div>
+          <button (click)=removeSelectedFriend(i)>Delete</button>
+          
+        </div>
+      </div>
+  </div> 
+
+  </div>
+
+</form>
+

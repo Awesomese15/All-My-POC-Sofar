@@ -1,0 +1,16 @@
+
+  [
+
+    {   "make": "Honda City", 
+        "model": "VX", 
+        "price": 2300 
+    },
+    {   "make": "Suzuki", 
+        "model": "Wagon R", 
+        "price": 3189 
+    },
+    {   "make": "Honda city", 
+        "model": "I20", 
+        "price": 4563 }
+
+  ]  

@@ -1,0 +1,45 @@
+<button (click)="getSelectedRows()">Get Selected Rows</button>
+<button (click)="addItems()">Add rows</button>
+<button (click)="removeItems()">Remove</button>
+
+<!-- <ag-grid-angular
+    #agGrid
+    style="width: 750px; height: 500px;"    
+    class="ag-theme-alpine"
+    [gridOptions]="gridOptions"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    rowSelection="multiple"
+    [animateRows]="true"
+    [paginationPageSize]="paginationPageSize"
+    [pagination]="true"
+    [suppressPaginationPanel]="true"
+    [suppressScrollOnNewData]="true"
+    (paginationChanged)="onPaginationChanged($event)"
+    (gridReady)="onGridReady($event)"
+>
+</ag-grid-angular> -->
+
+<ag-grid-angular
+    #agGrid
+    style="width: 750px; height: 500px;"    
+    class="ag-theme-alpine"
+    [gridOptions]="gridOptions"
+    [rowData]="rowData"
+    
+    [columnDefs]="columnDefs"
+    rowSelection="multiple"
+    [animateRows]="true"
+    [pagination]="true"
+    (gridReady)="onGridReady($event)"
+    [paginationPageSize]="paginationPageSize"
+    (paginationChanged)="onPaginationChanged($event)"
+
+    [rowClassRules]="rowClassRules"
+>
+</ag-grid-angular>
+
+<button (click)="updateRow()">Row Update</button>
+<button (click)="upadateCell()">Cell Update</button>
+<button (click)="updateAllRow()">All Row Update</button>
+<button (click)="clear()">clear</button>
